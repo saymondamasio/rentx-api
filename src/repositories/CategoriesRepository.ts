@@ -2,8 +2,9 @@ import { v4 as uuid } from 'uuid'
 
 import { ICreateCategoryDTO } from '../dtos/ICreateCategoryDTO'
 import { Category } from '../models/Category'
+import { ICategoriesRepository } from './ICategoriesRepository'
 
-export class CategoriesRepository {
+export class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[]
 
   constructor() {
