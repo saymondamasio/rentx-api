@@ -2,7 +2,7 @@ import { ICreateCategoryDTO } from '../dtos/ICreateCategoryDTO'
 import { Category } from '../entities/Category'
 
 export interface ICategoriesRepository {
-  list(): Category[]
-  findByName(name: string): Category
-  create(data: ICreateCategoryDTO): void
+  list(): Promise<Category[]>
+  findByName(name: string): Promise<Category | undefined>
+  create(data: ICreateCategoryDTO): Promise<void>
 }

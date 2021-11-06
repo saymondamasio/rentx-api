@@ -1,3 +1,4 @@
+import { getRepository, Repository } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
 import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO'
@@ -5,41 +6,31 @@ import { Category } from '../../entities/Category'
 import { ICategoriesRepository } from '../ICategoriesRepository'
 
 export class CategoriesRepository implements ICategoriesRepository {
-  private categories: Category[]
+  private repository: Repository<Category>
 
-  private static INSTANCE: CategoriesRepository
-
-  private constructor() {
-    this.categories = []
-  }
-
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository()
-    }
-
-    return CategoriesRepository.INSTANCE
+  constructor() {
+    this.repository = getRepository(Category)
   }
 
   // DTO => Data Transfer Object
-  create({ description, name }: ICreateCategoryDTO): void {
-    const category = {
-      id: uuid(),
+  async create({ description, name }: ICreateCategoryDTO): Promise<void> {
+    const category = this.repository.create({
       name,
       description,
-      created_at: new Date(),
-    }
+    })
 
-    this.categories.push(category)
+    await this.repository.save(category)
   }
 
-  findByName(name: string): Category | undefined {
-    const category = this.categories.find(category => category.name === name)
+  async findByName(name: string): Promise<Category | undefined> {
+    const category = await this.repository.findOne({ name })
 
     return category
   }
 
-  list(): Category[] {
-    return this.categories
+  async list(): Promise<Category[]> {
+    const categories = await this.repository.find()
+
+    return categories
   }
 }
