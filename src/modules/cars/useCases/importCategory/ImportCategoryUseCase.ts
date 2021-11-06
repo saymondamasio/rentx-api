@@ -48,7 +48,7 @@ export class ImportCategoryUseCase {
 
       const categoryExists = this.categoriesRepository.findByName(name)
       if (!categoryExists) {
-        this.categoriesRepository.create({
+        await this.categoriesRepository.create({
           name,
           description,
         })

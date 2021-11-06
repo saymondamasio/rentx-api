@@ -1,10 +1,10 @@
-import { getRepository, Repository } from 'typeorm'
-import { v4 as uuid } from 'uuid'
+import { EntityRepository, getRepository, Repository } from 'typeorm'
 
 import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO'
 import { Category } from '../../entities/Category'
 import { ICategoriesRepository } from '../ICategoriesRepository'
 
+@EntityRepository(Category)
 export class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>
 
