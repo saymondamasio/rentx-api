@@ -5,6 +5,8 @@
   "username": "docker",
   "password": "docker",
   "database": "rentx",
+  "uuidExtension": "pgcrypto",
+
   "migrations": ["./src/database/migrations/*.ts"],
   "entities": ["./src/modules/**/entities/*.ts"],
   "cli": {
