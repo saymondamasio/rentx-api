@@ -14,11 +14,8 @@ export class User {
   @Column()
   name: string
 
-  @Column()
-  email: string
-
   @Column({ unique: true })
-  username: string
+  email: string
 
   @Column()
   driver_license: string
