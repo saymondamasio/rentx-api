@@ -3,7 +3,6 @@ import fs from 'fs'
 import { inject, injectable } from 'tsyringe'
 
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'
-import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository'
 
 interface IImportCategory {
   name: string
@@ -52,7 +51,7 @@ export class ImportCategoryUseCase {
     categories.map(async category => {
       const { name, description } = category
 
-      const categoryExists = this.categoriesRepository.findByName(name)
+      const categoryExists = await this.categoriesRepository.findByName(name)
       if (!categoryExists) {
         await this.categoriesRepository.create({
           name,
