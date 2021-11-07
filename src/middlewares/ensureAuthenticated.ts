@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
+import { AppError } from '../errors/AppError'
 import { UsersRepository } from '../modules/accounts/repositories/implementations/UsersRepository'
 
 interface ITokenPayload {
@@ -13,7 +14,7 @@ export async function ensureAuthenticated(
   next: NextFunction
 ): Promise<void> {
   if (!req.headers.authorization) {
-    throw new Error('Token is missing')
+    throw new AppError('Token is missing', 401)
   }
 
   const [, token] = req.headers.authorization.split(' ')
@@ -24,16 +25,16 @@ export async function ensureAuthenticated(
     const { sub: user_id } = decoded as ITokenPayload
 
     const usersRepository = new UsersRepository()
-    const user = await usersRepository.findByEmail(user_id)
+    const user = await usersRepository.findById(user_id)
 
     if (!user) {
-      throw new Error('User not found')
+      throw new AppError('User not found', 401)
     }
 
     // req.user = user
 
     return next()
   } catch (err) {
-    throw new Error('Token invalid')
+    throw new AppError('Token invalid', 401)
   }
 }
