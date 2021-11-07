@@ -17,13 +17,16 @@ export class User {
   @Column()
   email: string
 
-  @Column()
+  @Column({ unique: true })
   username: string
+
+  @Column()
+  driver_license: string
 
   @Column()
   password: string
 
-  @Column()
+  @Column({ default: false })
   admin: boolean
 
   @CreateDateColumn()
