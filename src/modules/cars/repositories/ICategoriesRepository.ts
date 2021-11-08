@@ -1,5 +1,5 @@
 import { ICreateCategoryDTO } from '../dtos/ICreateCategoryDTO'
-import { Category } from '../entities/Category'
+import { Category } from '../infra/typeorm/entities/Category'
 
 export interface ICategoriesRepository {
   list(): Promise<Category[]>

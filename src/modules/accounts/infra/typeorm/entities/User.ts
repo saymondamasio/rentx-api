@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
+import { IUser } from '@modules/accounts/entities/IUser'
+
 @Entity('users')
-export class User {
+export class User implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string
 

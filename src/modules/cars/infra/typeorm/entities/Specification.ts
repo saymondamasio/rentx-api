@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
+import { ISpecification } from '@modules/cars/entities/ISpecification'
+
 @Entity('specifications')
-export class Specification {
+export class Specification implements ISpecification {
   @PrimaryGeneratedColumn('uuid')
   id: string
 

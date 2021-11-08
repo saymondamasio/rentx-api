@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
+import { ICategory } from '@modules/cars/entities/ICategory'
+
 @Entity('categories')
-export class Category {
+export class Category implements ICategory {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
