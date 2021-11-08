@@ -20,14 +20,14 @@ export class User {
   @Column()
   driver_license: string
 
-  @Column()
-  avatar: string
+  @Column({ nullable: true })
+  avatar?: string
 
   @Column()
   password: string
 
   @Column({ default: false })
-  admin: boolean
+  admin?: boolean
 
   @CreateDateColumn()
   created_at: Date

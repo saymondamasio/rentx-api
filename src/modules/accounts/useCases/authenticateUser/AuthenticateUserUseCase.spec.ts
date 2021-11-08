@@ -1,0 +1,62 @@
+import { AppError } from '../../../../errors/AppError'
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
+import { UsersRepositoryFake } from '../../repositories/fakes/UsersRepositoryFake'
+import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
+
+let authenticateUserUseCase: AuthenticateUserUseCase
+let createUserUseCase: CreateUserUseCase
+let usersRepositoryFake: UsersRepositoryFake
+
+describe('Authenticate User', () => {
+  beforeEach(() => {
+    usersRepositoryFake = new UsersRepositoryFake()
+    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepositoryFake)
+    createUserUseCase = new CreateUserUseCase(usersRepositoryFake)
+  })
+
+  it('should be able to authenticate an user', async () => {
+    const user: ICreateUserDTO = {
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+      driver_license: '123456789',
+    }
+
+    await createUserUseCase.execute(user)
+
+    const result = await authenticateUserUseCase.execute({
+      email: user.email,
+      password: user.password,
+    })
+
+    expect(result).toHaveProperty('token')
+  })
+
+  it('should not be able to authenticate an nonexistent user', async () => {
+    await expect(
+      authenticateUserUseCase.execute({
+        email: 'nonuser@mail.com',
+        password: '123456',
+      })
+    ).rejects.toBeInstanceOf(AppError)
+  })
+
+  it('should not be able to authenticate with incorrect password', async () => {
+    const user: ICreateUserDTO = {
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+      driver_license: '123456789',
+    }
+
+    await createUserUseCase.execute(user)
+
+    await expect(
+      authenticateUserUseCase.execute({
+        email: user.email,
+        password: 'password-incorrect',
+      })
+    ).rejects.toBeInstanceOf(AppError)
+  })
+})

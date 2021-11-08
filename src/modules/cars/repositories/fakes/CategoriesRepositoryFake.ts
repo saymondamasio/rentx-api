@@ -1,4 +1,4 @@
-import { v4 } from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO'
 import { Category } from '../../entities/Category'
@@ -19,7 +19,7 @@ export class CategoriesRepositoryFake implements ICategoriesRepository {
 
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
     const category: Category = {
-      id: v4(),
+      id: uuid(),
       name,
       description,
       created_at: new Date(),
