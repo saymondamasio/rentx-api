@@ -120,4 +120,6 @@ dist
 
 #temp
 tmp/*
+!tmp/avatar
+tmp/avatar/*
 

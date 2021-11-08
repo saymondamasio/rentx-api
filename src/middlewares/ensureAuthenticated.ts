@@ -31,7 +31,7 @@ export async function ensureAuthenticated(
       throw new AppError('User not found', 401)
     }
 
-    // req.user = user
+    req.user_id = user_id
 
     return next()
   } catch (err) {
