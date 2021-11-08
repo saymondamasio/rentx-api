@@ -1,3 +1,4 @@
+import { AppError } from '../../../../errors/AppError'
 import { CategoriesRepositoryFake } from '../../repositories/fakes/CategoriesRepositoryFake'
 import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
@@ -23,5 +24,18 @@ describe('Create Category', () => {
     )
 
     expect(categoryCreated).toHaveProperty('id')
+  })
+
+  it('should not be able to create a new category with name exists', async () => {
+    const category = {
+      name: 'New Category',
+      description: 'New Category Description',
+    }
+
+    await createCategoryUseCase.execute(category)
+
+    await expect(
+      createCategoryUseCase.execute(category)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })
