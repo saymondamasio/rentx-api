@@ -1,13 +1,14 @@
 import 'reflect-metadata'
 import express, { NextFunction, Request, Response } from 'express'
 import swaggerUI from 'swagger-ui-express'
+
+import { AppError } from '@errors/AppError'
 import 'express-async-errors'
 
-import './shared/container'
+import '@shared/container'
 import './database'
 
 import swaggerConfig from '../swagger.json'
-import { AppError } from './errors/AppError'
 import { routes } from './routes'
 
 const app = express()

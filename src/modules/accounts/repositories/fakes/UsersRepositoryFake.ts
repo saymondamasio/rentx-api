@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid'
 
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
-import { User } from '../../entities/User'
+import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO'
+import { User } from '@modules/accounts/entities/User'
+
 import { IUsersRepository } from '../IUsersRepository'
 
 export class UsersRepositoryFake implements IUsersRepository {

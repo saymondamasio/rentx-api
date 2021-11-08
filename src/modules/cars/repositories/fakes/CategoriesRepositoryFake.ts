@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid'
 
-import { ICreateCategoryDTO } from '../../dtos/ICreateCategoryDTO'
-import { Category } from '../../entities/Category'
+import { ICreateCategoryDTO } from '@modules/cars/dtos/ICreateCategoryDTO'
+import { Category } from '@modules/cars/entities/Category'
+
 import { ICategoriesRepository } from '../ICategoriesRepository'
 
 export class CategoriesRepositoryFake implements ICategoriesRepository {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { container, inject } from 'tsyringe'
+import { container } from 'tsyringe'
 
 import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
