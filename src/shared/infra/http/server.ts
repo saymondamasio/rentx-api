@@ -6,11 +6,11 @@ import { AppError } from '@shared/errors/AppError'
 import 'express-async-errors'
 
 import '@shared/container'
-import '../typeorm'
-
 import swaggerConfig from '../../../../swagger.json'
+import { createConnectionApplication } from '../typeorm'
 import { routes } from './routes'
 
+createConnectionApplication()
 const app = express()
 
 app.use(express.json())
