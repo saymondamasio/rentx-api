@@ -39,7 +39,7 @@ export class Car implements ICar {
   brand: string
 
   @ManyToOne(() => Category)
-  @JoinColumn()
+  @JoinColumn({ name: 'category_id' })
   category: Category
 
   @Column({ nullable: true })
