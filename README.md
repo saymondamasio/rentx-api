@@ -3,7 +3,6 @@
 ### Requisitos funcionais
 
 Deve ser possivel cadastrar um novo carro
-Deve ser possivel listar todas as categorias
 
 ### Requisitos não funcionais
 
@@ -11,7 +10,6 @@ Deve ser possivel listar todas as categorias
 
 Quem cadastrar o carro deve ser um usuario administrador.
 Não deve ser possivel cadastrar um carro com uma placa já existente
-Não deve ser possivel alterar a placa de um carro já existente.
 O carro deve estar disponivel ao cadastrar.
 
 ## **Listagem de carros**

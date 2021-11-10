@@ -1,0 +1,78 @@
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
+
+export class CreateCars1636544353209 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'cars',
+        columns: [
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'uuid',
+          },
+          {
+            name: 'name',
+            type: 'varchar',
+          },
+          {
+            name: 'description',
+            type: 'varchar',
+          },
+          {
+            name: 'dauly_rate',
+            type: 'numeric',
+          },
+          {
+            name: 'available',
+            type: 'boolean',
+            default: true,
+          },
+          {
+            name: 'license_plate',
+            type: 'varchar',
+          },
+          {
+            name: 'fine_amount',
+            type: 'numeric',
+          },
+          {
+            name: 'brand',
+            type: 'varchar',
+          },
+          {
+            name: 'category_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+        ],
+        foreignKeys: [
+          {
+            name: 'FK_car_category',
+            referencedTableName: 'categories',
+            referencedColumnNames: ['id'],
+            columnNames: ['category_id'],
+            onUpdate: 'CASCADE',
+            onDelete: 'SET NULL',
+          },
+        ],
+      })
+    )
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('cars')
+  }
+}
