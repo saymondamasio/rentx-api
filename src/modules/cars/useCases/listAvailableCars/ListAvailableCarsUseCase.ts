@@ -1,4 +1,4 @@
-import { inject } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 
 import { ICar } from '@modules/cars/entities/ICar'
 import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository'
@@ -9,7 +9,8 @@ interface IRequest {
   category_id?: string
 }
 
-export class ListCarsUseCase {
+@injectable()
+export class ListAvailableCarsUseCase {
   constructor(
     @inject('CarsRepository') private carsRepository: ICarsRepository
   ) {}
