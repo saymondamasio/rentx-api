@@ -44,7 +44,6 @@ Não deve ser possivel cadastrar uma especificação para o mesmo carro.
 ### Requisitos funcionais
 
 Deve ser possivel cadastrar a imagem do carro.
-Deve ser possivel listar todos os carros.
 
 ### Requisitos não funcionais
 

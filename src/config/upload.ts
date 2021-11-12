@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import multer from 'multer'
 import { resolve } from 'path'
 
-export default {
+export const uploadConfig = {
   upload(folder: string[]) {
     return {
       storage: multer.diskStorage({
