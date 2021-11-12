@@ -8,6 +8,16 @@ import { ICarsRepository } from '../ICarsRepository'
 export class CarsRepositoryFake implements ICarsRepository {
   private cars: ICar[] = []
 
+  async save(car: ICar): Promise<void> {
+    const carIndex = this.cars.findIndex(c => c.id === car.id)
+
+    this.cars[carIndex] = car
+  }
+
+  async findById(id: string): Promise<ICar> {
+    return this.cars.find(car => car.id === id)
+  }
+
   async findAllAvailable(
     name?: string,
     brand?: string,
@@ -49,6 +59,8 @@ export class CarsRepositoryFake implements ICarsRepository {
       description,
       fine_amount,
       license_plate,
+      specifications: [],
+      category: null,
       available: true,
       created_at: new Date(),
       updated_at: new Date(),

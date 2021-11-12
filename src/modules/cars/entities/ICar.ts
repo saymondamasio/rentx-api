@@ -1,3 +1,6 @@
+import { ICategory } from './ICategory'
+import { ISpecification } from './ISpecification'
+
 export interface ICar {
   id: string
   name: string
@@ -7,6 +10,8 @@ export interface ICar {
   license_plate: string
   fine_amount: number
   brand: string
+  specifications: ISpecification[]
+  category: ICategory
   category_id: string
   created_at: Date
   updated_at: Date

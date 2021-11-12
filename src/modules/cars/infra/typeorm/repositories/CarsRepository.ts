@@ -14,6 +14,16 @@ export class CarsRepository implements ICarsRepository {
     this.repository = getRepository(Car)
   }
 
+  async save(car: ICar): Promise<void> {
+    await this.repository.save(car)
+  }
+
+  async findById(id: string): Promise<ICar> {
+    const car = await this.repository.findOne(id)
+
+    return car
+  }
+
   async findAllAvailable(
     name?: string,
     brand?: string,

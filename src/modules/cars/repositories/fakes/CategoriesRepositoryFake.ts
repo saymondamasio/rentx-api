@@ -1,25 +1,25 @@
 import { v4 as uuid } from 'uuid'
 
 import { ICreateCategoryDTO } from '@modules/cars/dtos/ICreateCategoryDTO'
-import { Category } from '@modules/cars/infra/typeorm/entities/Category'
+import { ICategory } from '@modules/cars/entities/ICategory'
 
 import { ICategoriesRepository } from '../ICategoriesRepository'
 
 export class CategoriesRepositoryFake implements ICategoriesRepository {
-  categories: Category[] = []
+  categories: ICategory[] = []
 
-  async list(): Promise<Category[]> {
+  async list(): Promise<ICategory[]> {
     return this.categories
   }
 
-  async findByName(name: string): Promise<Category> {
+  async findByName(name: string): Promise<ICategory> {
     const category = this.categories.find(category => category.name === name)
 
     return category
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
-    const category: Category = {
+    const category: ICategory = {
       id: uuid(),
       name,
       description,

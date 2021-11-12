@@ -32,7 +32,6 @@ O usuario não precisa estar logado para listar os carros disponiveis.
 ### Requisitos funcionais
 
 Deve ser possivel cadastrar uma especificação para um carro.
-Deve ser possivel listar todas as especificações
 
 ### Regras de negocio
 

@@ -3,6 +3,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -11,6 +13,7 @@ import {
 import { ICar } from '@modules/cars/entities/ICar'
 
 import { Category } from './Category'
+import { Specification } from './Specification'
 
 @Entity('cars')
 export class Car implements ICar {
@@ -37,6 +40,14 @@ export class Car implements ICar {
 
   @Column()
   brand: string
+
+  @ManyToMany(() => Specification)
+  @JoinTable({
+    name: 'specifications_cars',
+    joinColumns: [{ name: 'car_id' }],
+    inverseJoinColumns: [{ name: 'specification_id' }],
+  })
+  specifications: Specification[]
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
