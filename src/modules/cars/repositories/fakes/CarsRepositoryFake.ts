@@ -8,10 +8,12 @@ import { ICarsRepository } from '../ICarsRepository'
 export class CarsRepositoryFake implements ICarsRepository {
   private cars: ICar[] = []
 
-  async save(car: ICar): Promise<void> {
+  async save(car: ICar): Promise<ICar> {
     const carIndex = this.cars.findIndex(c => c.id === car.id)
 
     this.cars[carIndex] = car
+
+    return car
   }
 
   async findById(id: string): Promise<ICar> {

@@ -2,7 +2,7 @@ import { ICreateCarDTO } from '../dtos/ICreateCarDTO'
 import { ICar } from '../entities/ICar'
 
 export interface ICarsRepository {
-  save(car: ICar): Promise<void>
+  save(car: ICar): Promise<ICar>
   findById(id: string): Promise<ICar>
   findAllAvailable(
     name?: string,
