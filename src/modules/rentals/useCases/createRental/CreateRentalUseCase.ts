@@ -1,13 +1,9 @@
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import { inject, injectable } from 'tsyringe'
 
 import { IRental } from '@modules/rentals/entities/IRental'
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
 import { AppError } from '@shared/errors/AppError'
-
-dayjs.extend(utc)
 
 interface IRequest {
   user_id: string

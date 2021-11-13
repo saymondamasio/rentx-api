@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles",
     "seed:admin": "tsnd src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "@types/jest": "^27.0.2",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/multer": "^1.4.7",
+    "@types/supertest": "^2.0.11",
     "@types/swagger-ui-express": "^4.1.3",
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
@@ -44,6 +45,7 @@
     "eslint-plugin-promise": "^5.1.1",
     "jest": "^27.3.1",
     "prettier": "^2.4.1",
+    "supertest": "^6.1.6",
     "ts-jest": "^27.0.7",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0",
