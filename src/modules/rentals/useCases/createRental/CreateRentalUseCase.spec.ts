@@ -1,11 +1,13 @@
 import dayjs from 'dayjs'
 
 import { RentalsRepositoryFake } from '@modules/rentals/repositories/fakes/RentalsRepositoryFake'
+import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import { AppError } from '@shared/errors/AppError'
 
 import { CreateRentalUseCase } from './CreateRentalUseCase'
 
 let rentalsRepository: RentalsRepositoryFake
+let dateProvider: DayjsDateProvider
 let createRentalUseCase: CreateRentalUseCase
 
 describe('Create Rental', () => {
@@ -13,7 +15,11 @@ describe('Create Rental', () => {
 
   beforeEach(() => {
     rentalsRepository = new RentalsRepositoryFake()
-    createRentalUseCase = new CreateRentalUseCase(rentalsRepository)
+    dateProvider = new DayjsDateProvider()
+    createRentalUseCase = new CreateRentalUseCase(
+      rentalsRepository,
+      dateProvider
+    )
   })
 
   it('should be able to create a new rental', async () => {

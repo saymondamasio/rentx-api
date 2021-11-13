@@ -4,6 +4,7 @@ import { inject, injectable } from 'tsyringe'
 
 import { IRental } from '@modules/rentals/entities/IRental'
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository'
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
 import { AppError } from '@shared/errors/AppError'
 
 dayjs.extend(utc)
@@ -17,7 +18,8 @@ interface IRequest {
 @injectable()
 export class CreateRentalUseCase {
   constructor(
-    @inject('RentalsRepository') private rentalsRepository: IRentalsRepository
+    @inject('RentalsRepository') private rentalsRepository: IRentalsRepository,
+    @inject('DateProvider') private dateProvider: IDateProvider
   ) {}
 
   async execute({
@@ -40,14 +42,10 @@ export class CreateRentalUseCase {
       throw new AppError("There's a rental in progress for user!")
     }
 
-    const expectedReturnDate = dayjs(expected_return_date)
-      .utc()
-      .local()
-      .format()
-
-    const dateNow = dayjs().utc().local().format()
-
-    const compare = dayjs(expectedReturnDate).diff(dateNow, 'hours')
+    const compare = this.dateProvider.compareInHours(
+      new Date(),
+      expected_return_date
+    )
 
     if (compare < minimumHour) {
       throw new AppError('Minimum rental time is 24 hours')

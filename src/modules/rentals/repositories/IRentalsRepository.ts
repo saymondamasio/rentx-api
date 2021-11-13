@@ -3,6 +3,6 @@ import { IRental } from '../entities/IRental'
 
 export interface IRentalsRepository {
   create(data: ICreateRentalDTO): Promise<IRental>
-  findOpenRentalByCar(id: string): Promise<IRental>
-  findOpenRentalByUser(id: string): Promise<IRental>
+  findOpenRentalByCar(car_id: string): Promise<IRental>
+  findOpenRentalByUser(user_id: string): Promise<IRental>
 }
