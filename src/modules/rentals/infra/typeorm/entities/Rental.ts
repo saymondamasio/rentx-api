@@ -2,16 +2,23 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
 
+import { Car } from '@modules/cars/infra/typeorm/entities/Car'
 import { IRental } from '@modules/rentals/entities/IRental'
 
 @Entity('rentals')
 export class Rental implements IRental {
   @PrimaryGeneratedColumn('uuid')
   id: string
+
+  @ManyToOne(() => Car)
+  @JoinColumn({ name: 'car_id' })
+  car: Car
 
   @Column()
   car_id: string
