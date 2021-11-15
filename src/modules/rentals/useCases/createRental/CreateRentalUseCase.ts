@@ -25,7 +25,13 @@ export class CreateRentalUseCase {
     expected_return_date,
     user_id,
   }: IRequest): Promise<IRental> {
-    const minimumHour = 24
+    const minimumHoursDevolution = 24
+
+    const car = await this.carsRepository.findById(car_id)
+
+    if (!car) {
+      throw new AppError('Car not found')
+    }
 
     const rentalByCarUnavailable =
       await this.rentalsRepository.findOpenRentalByCar(car_id)
@@ -33,6 +39,7 @@ export class CreateRentalUseCase {
     if (rentalByCarUnavailable) {
       throw new AppError('Car unavailable')
     }
+
     const rentalByUserUnavailable =
       await this.rentalsRepository.findOpenRentalByUser(user_id)
 
@@ -40,12 +47,12 @@ export class CreateRentalUseCase {
       throw new AppError("There's a rental in progress for user!")
     }
 
-    const compare = this.dateProvider.compareInHours(
+    const compare = this.dateProvider.differenceInHours(
       new Date(),
       expected_return_date
     )
 
-    if (compare < minimumHour) {
+    if (compare < minimumHoursDevolution) {
       throw new AppError('Minimum rental time is 24 hours')
     }
 

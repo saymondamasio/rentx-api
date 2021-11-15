@@ -1,6 +1,7 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm'
 
 import { ICreateCategoryDTO } from '@modules/cars/dtos/ICreateCategoryDTO'
+import { ICategory } from '@modules/cars/entities/ICategory'
 import { Category } from '@modules/cars/infra/typeorm/entities/Category'
 
 import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository'
@@ -11,6 +12,12 @@ export class CategoriesRepository implements ICategoriesRepository {
 
   constructor() {
     this.repository = getRepository(Category)
+  }
+
+  async findById(category_id: string): Promise<ICategory> {
+    const category = await this.repository.findOne(category_id)
+
+    return category
   }
 
   // DTO => Data Transfer Object

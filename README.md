@@ -66,6 +66,7 @@ O aluguel deve ter uma duração minima de 24 horas.
 Ao realizar o aluguel, os status do carro deverá ser alterado para indisponivel.
 Não deve ser possivel cadastrar um novo aluguel caso já exista um aberto para o mesmo usuario.
 Não deve ser possivel cadastrar um novo aluguel caso já exista um aberto para o mesmo carro.
+O usuario deve estar logado na aplicação.
 
 ## **Devolução do carro**
 
@@ -81,3 +82,4 @@ Ao realizar a devolução, o usuário deverá ser liberado para outro aluguel.
 Ao realizar a devolução, deverá ser calculado o total do aluguel.
 Caso o horário de devolução seja superior ao horário previsto no de entrega, deverá ser cobrado multa proporcional aos dias de atraso.
 Caso haja multa, deverá ser somado ao total do aluguel.
+O usuario deve estar logado na aplicação.
