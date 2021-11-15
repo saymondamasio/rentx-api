@@ -21,13 +21,15 @@ export class CategoriesRepository implements ICategoriesRepository {
   }
 
   // DTO => Data Transfer Object
-  async create({ description, name }: ICreateCategoryDTO): Promise<void> {
+  async create({ description, name }: ICreateCategoryDTO): Promise<ICategory> {
     const category = this.repository.create({
       name,
       description,
     })
 
     await this.repository.save(category)
+
+    return category
   }
 
   async findByName(name: string): Promise<Category | undefined> {

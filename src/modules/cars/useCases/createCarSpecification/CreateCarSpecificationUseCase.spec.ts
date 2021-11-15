@@ -20,8 +20,6 @@ describe('Create Car Specification', () => {
   })
 
   it('should be able to add a new specification to the car', async () => {
-    const specifications_id = ['11']
-
     const car = await carsRepository.create({
       name: 'Fusca',
       brand: 'VW',
@@ -52,6 +50,6 @@ describe('Create Car Specification', () => {
 
     await expect(
       createCarSpecificationUseCase.execute({ car_id, specifications_id })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('Car not found'))
   })
 })

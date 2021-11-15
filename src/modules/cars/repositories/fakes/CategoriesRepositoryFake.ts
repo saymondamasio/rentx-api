@@ -8,6 +8,10 @@ import { ICategoriesRepository } from '../ICategoriesRepository'
 export class CategoriesRepositoryFake implements ICategoriesRepository {
   categories: ICategory[] = []
 
+  async findById(category_id: string): Promise<ICategory> {
+    return this.categories.find(category => category.id === category_id)
+  }
+
   async list(): Promise<ICategory[]> {
     return this.categories
   }
@@ -18,7 +22,7 @@ export class CategoriesRepositoryFake implements ICategoriesRepository {
     return category
   }
 
-  async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+  async create({ name, description }: ICreateCategoryDTO): Promise<ICategory> {
     const category: ICategory = {
       id: uuid(),
       name,
@@ -28,5 +32,7 @@ export class CategoriesRepositoryFake implements ICategoriesRepository {
     }
 
     this.categories.push(category)
+
+    return category
   }
 }

@@ -8,6 +8,24 @@ import { IRentalsRepository } from '../IRentalsRepository'
 export class RentalsRepositoryFake implements IRentalsRepository {
   private rentals: IRental[] = []
 
+  async findByUser(user_id: string): Promise<IRental[]> {
+    return this.rentals.filter(rental => rental.user_id === user_id)
+  }
+
+  async save(rental: IRental): Promise<IRental> {
+    const findIndex = this.rentals.findIndex(
+      findRental => findRental.id === rental.id
+    )
+
+    this.rentals[findIndex] = rental
+
+    return rental
+  }
+
+  async findById(id: string): Promise<IRental> {
+    return this.rentals.find(rental => rental.id === id)
+  }
+
   async create({
     car_id,
     expected_return_date,
