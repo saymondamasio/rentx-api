@@ -6,9 +6,9 @@ import { RevokeTokenController } from '@modules/accounts/useCases/revokeToken/Re
 
 const authRoutes = Router()
 
-authRoutes.post('/refresh-token', new RefreshTokenController().handle)
-
 authRoutes.post('/', new AuthenticateUserController().handle)
+
+authRoutes.post('/refresh-token', new RefreshTokenController().handle)
 
 authRoutes.delete('/revoke', new RevokeTokenController().handle)
 

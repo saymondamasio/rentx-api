@@ -24,8 +24,6 @@ export class AuthenticateUserController {
       path: authConfig.path_refresh_token,
     })
 
-    console.log('chegou aqui', email, password)
-
     return response.json({ user, token })
   }
 }
