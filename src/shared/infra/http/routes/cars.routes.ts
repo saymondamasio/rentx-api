@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import multer from 'multer'
 
-import { uploadConfig } from '@config/upload'
+import { storageConfig } from '@config/storage'
 import { CreateCarController } from '@modules/cars/useCases/createCar/CreateCarController'
 import { CreateCarSpecificationController } from '@modules/cars/useCases/createCarSpecification/CreateCarSpecificationController'
 import { ListAvailableCarsController } from '@modules/cars/useCases/listAvailableCars/ListAvailableCarsController'
@@ -12,7 +12,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
 const carsRoutes = Router()
 
-const uploadImages = multer(uploadConfig.upload(['tmp', 'cars']))
+const uploadImages = multer(storageConfig.multer(['tmp', 'cars']))
 
 carsRoutes.post(
   '/',
