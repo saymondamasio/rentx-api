@@ -1,6 +1,8 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -10,13 +12,14 @@ import {
 import { IUserToken } from '@modules/accounts/entities/IUserToken'
 
 import { User } from './User'
-
+@Entity('user_tokens')
 export class UserToken implements IUserToken {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column()
-  refresh_token: string
+  @Generated('uuid')
+  token: string
 
   @Column()
   user_id: string
