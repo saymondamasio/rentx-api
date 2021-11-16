@@ -6,6 +6,9 @@ import { IDateProvider } from '../IDateProvider'
 dayjs.extend(utc)
 
 export class DayjsDateProvider implements IDateProvider {
+  addDays(date: Date, days: number): Date {
+    return dayjs(date).add(days, 'days').utc().local().toDate()
+  }
   differenceInDays(start_date: Date, end_date: Date): number {
     const start_date_utc = dayjs(start_date).utc().local().format()
     const end_date_utc = dayjs(end_date).utc().local().format()

@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
+import { authConfig } from '@config/auth'
+
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
 
 export class AuthenticateUserController {
@@ -9,10 +11,20 @@ export class AuthenticateUserController {
 
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase)
 
-    const { token, user } = await authenticateUserUseCase.execute({
-      email,
-      password,
+    const { token, user, refresh_token } =
+      await authenticateUserUseCase.execute({
+        email,
+        password,
+      })
+
+    response.cookie('refresh_token', refresh_token, {
+      secure: false,
+      httpOnly: true,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      path: authConfig.path_refresh_token,
     })
+
+    console.log('chegou aqui', email, password)
 
     return response.json({ user, token })
   }

@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import cookieParser from 'cookie-parser'
 import express, { NextFunction, Request, Response } from 'express'
 import swaggerUI from 'swagger-ui-express'
 
@@ -13,6 +14,7 @@ import { routes } from './routes'
 createConnectionApplication()
 const app = express()
 
+app.use(cookieParser())
 app.use(express.json())
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerConfig))
