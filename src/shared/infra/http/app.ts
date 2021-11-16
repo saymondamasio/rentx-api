@@ -1,18 +1,28 @@
 import 'reflect-metadata'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import express, { NextFunction, Request, Response } from 'express'
 import swaggerUI from 'swagger-ui-express'
 
 import { AppError } from '@shared/errors/AppError'
+
 import 'express-async-errors'
 
 import '@shared/container'
+
 import swaggerConfig from '../../../../swagger.json'
 import { createConnectionApplication } from '../typeorm'
 import { routes } from './routes'
 
 createConnectionApplication()
 const app = express()
+
+app.use(
+  cors({
+    origin: [`${process.env.APP_WEB_URL}`],
+    credentials: true,
+  })
+)
 
 app.use(cookieParser())
 app.use(express.json())
