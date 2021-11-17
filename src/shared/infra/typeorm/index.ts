@@ -1,17 +1,24 @@
-import { Connection, createConnection, getConnectionOptions } from 'typeorm'
+import { Connection, createConnections, getConnectionOptions } from 'typeorm'
 
-export const createConnectionApplication = async (
-  host = 'database'
-): Promise<Connection> => {
-  const defaultOptions = await getConnectionOptions()
+export const createConnectionApplication = async (): Promise<Connection[]> => {
+  const defaultOptionsPostgres = await getConnectionOptions()
+  const defaultOptionsMongo = await getConnectionOptions('mongo')
 
-  return createConnection(
-    Object.assign(defaultOptions, {
-      host: process.env.NODE_ENV === 'test' ? 'localhost' : host,
+  return createConnections([
+    Object.assign(defaultOptionsPostgres, {
+      host: process.env.NODE_ENV === 'test' ? 'localhost' : 'rentx_postgres',
       database:
         process.env.NODE_ENV === 'test'
           ? 'rentx_test'
-          : defaultOptions.database,
-    })
-  )
+          : defaultOptionsPostgres.database,
+    }),
+    Object.assign(defaultOptionsMongo, {
+      name: 'mongo',
+      host: process.env.NODE_ENV === 'test' ? 'localhost' : 'rentx_mongo',
+      database:
+        process.env.NODE_ENV === 'test'
+          ? 'rentx_test'
+          : defaultOptionsMongo.database,
+    }),
+  ])
 }

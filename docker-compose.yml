@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  database: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
+  rentx_postgres: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
     image: postgres
-    container_name: rentx-db
+    container_name: rentx-db-postgres
     restart: always
     ports:
       - 5432:5432
@@ -13,6 +13,21 @@ services:
       - POSTGRES_DB=rentx
     volumes:
       - pgdata:/data/postgres
+
+  rentx_redis:
+    container_name: rentx-db-redis
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379
+
+  rentx_mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: rentx
+    ports:
+      - 27017:27017
 
   app:
     build: .
@@ -24,9 +39,13 @@ services:
     volumes:
       - .:/usr/app
     links:
-      - database
+      - rentx_postgres
+      - rentx_redis
+      - rentx_mongo
     depends_on:
-      - database
+      - rentx_postgres
+      - rentx_redis
+      - rentx_mongo
 
 volumes:
   pgdata:

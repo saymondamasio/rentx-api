@@ -1,5 +1,7 @@
 import { container } from 'tsyringe'
 
+import { ICacheProvider } from './CacheProvider/ICacheProvider'
+import { RedisCacheProvider } from './CacheProvider/implementations/RedisCacheProvider'
 import { IDateProvider } from './DateProvider/IDateProvider'
 import { DayjsDateProvider } from './DateProvider/implementations/DayjsDateProvider'
 import { IMailProvider } from './MailProvider/IMailProvider'
@@ -25,3 +27,5 @@ container.registerSingleton<IStorageProvider>(
   'StorageProvider',
   DiskStorageProvider
 )
+
+container.registerSingleton<ICacheProvider>('CacheProvider', RedisCacheProvider)
