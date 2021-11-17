@@ -11,10 +11,10 @@ import 'express-async-errors'
 import '@shared/container'
 
 import swaggerConfig from '../../../../swagger.json'
-import { createConnectionApplication } from '../typeorm'
+import { createConnectionsApplication } from '../typeorm'
 import { routes } from './routes'
 
-createConnectionApplication()
+createConnectionsApplication()
 const app = express()
 
 app.use(

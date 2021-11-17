@@ -23,6 +23,7 @@ services:
 
   rentx_mongo:
     image: mongo
+    container_name: rentx-db-mongo
     restart: always
     environment:
       MONGO_INITDB_DATABASE: rentx
