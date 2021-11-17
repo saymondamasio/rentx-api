@@ -5,7 +5,6 @@ export class MailProviderFake implements IMailProvider {
   private mails = []
 
   async sendMail(data: ISendMailDTO): Promise<void> {
-    console.log('Simulando envio de email...')
     this.mails.push(data)
   }
 }
