@@ -26,7 +26,7 @@ describe('Send Forgot Mail', () => {
   })
 
   it('should be able to send a forgot password mail to user', async () => {
-    // const sendMail = spyOn(mailProvider, 'sendMail')
+    const sendMail = spyOn(mailProvider, 'sendMail')
 
     await usersRepository.create({
       name: 'John Doe',
@@ -37,6 +37,6 @@ describe('Send Forgot Mail', () => {
 
     await sendForgotPasswordMailUseCase.execute('johndoe@mail.com')
 
-    // expect(mailProvider.sendMail).toHaveBeenCalled()
+    expect(sendMail).toHaveBeenCalled()
   })
 })

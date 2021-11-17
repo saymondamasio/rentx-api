@@ -2,7 +2,7 @@ import { ISendMailDTO } from '../dtos/ISendMailDTO'
 import { IMailProvider } from '../IMailProvider'
 
 export class MailProviderFake implements IMailProvider {
-  mails = []
+  private mails = []
 
   async sendMail(data: ISendMailDTO): Promise<void> {
     console.log('Simulando envio de email...')
