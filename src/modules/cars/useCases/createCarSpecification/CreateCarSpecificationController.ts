@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
@@ -17,6 +18,6 @@ export class CreateCarSpecificationController {
       specifications_id,
     })
 
-    return response.json(carUpdated)
+    return response.json(classToClass(carUpdated))
   }
 }

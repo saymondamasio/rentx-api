@@ -12,7 +12,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
 const carsRoutes = Router()
 
-const uploadImages = multer(storageConfig.multer(['tmp', 'cars']))
+const uploadImages = multer(storageConfig.upload.multer)
 
 carsRoutes.post(
   '/',

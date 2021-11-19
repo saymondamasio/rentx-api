@@ -1,5 +1,7 @@
 import { container } from 'tsyringe'
 
+import { storageConfig } from '@config/storage'
+
 import { ICacheProvider } from './CacheProvider/ICacheProvider'
 import { RedisCacheProvider } from './CacheProvider/implementations/RedisCacheProvider'
 import { IDateProvider } from './DateProvider/IDateProvider'
@@ -9,7 +11,13 @@ import { EtherealMailProvider } from './MailProvider/implementations/EtherealMai
 import { IMailTemplateProvider } from './MailTemplateProvider/IMailTemplateProvider'
 import { HandlebarsMailTemplateProvider } from './MailTemplateProvider/implementations/HandlebarsMailTemplateProvider'
 import { DiskStorageProvider } from './StorageProvider/implementations/DiskStorageProvider'
+import { S3StorageProvider } from './StorageProvider/implementations/S3StorageProvider'
 import { IStorageProvider } from './StorageProvider/IStorageProvider'
+
+const storage = {
+  disk: DiskStorageProvider,
+  s3: S3StorageProvider,
+}
 
 container.registerSingleton<IDateProvider>('DateProvider', DayjsDateProvider)
 
@@ -25,7 +33,7 @@ container.registerInstance<IMailProvider>(
 
 container.registerSingleton<IStorageProvider>(
   'StorageProvider',
-  DiskStorageProvider
+  storage[storageConfig.driver]
 )
 
 container.registerSingleton<ICacheProvider>('CacheProvider', RedisCacheProvider)

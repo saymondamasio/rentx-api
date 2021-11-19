@@ -3,6 +3,7 @@ import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
 import { authConfig } from '@config/auth'
+import { IUser } from '@modules/accounts/entities/IUser'
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
 import { AppError } from '@shared/errors/AppError'
 
@@ -12,10 +13,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: {
-    name: string
-    email: string
-  }
+  user: IUser
   token: string
   refresh_token: string
 }

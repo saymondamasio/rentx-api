@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
@@ -24,6 +25,6 @@ export class AuthenticateUserController {
       path: authConfig.path_refresh_token,
     })
 
-    return response.json({ user, token })
+    return response.json({ user: classToClass(user), token })
   }
 }
