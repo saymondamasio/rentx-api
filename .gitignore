@@ -120,7 +120,7 @@ dist
 
 #temp
 tmp/*
-!temp/.gitkeep
+!tmp/.gitkeep
 uploads/avatar/*
 !uploads/avatar/.gitkeep
 uploads/cars/*
