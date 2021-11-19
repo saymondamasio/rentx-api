@@ -33,9 +33,9 @@ export class User implements IUser {
 
     switch (storageConfig.driver) {
       case 'disk':
-        return `${process.env.APP_API_URL}/avatar/${this.avatar}`
+        return `${storageConfig.config.disk.url}/avatar/${this.avatar}`
       case 's3':
-        return `http://${storageConfig.config.aws.bucket}.s3.amazonaws.com/avatar/${this.avatar}`
+        return `${storageConfig.config.aws.url}/avatar/${this.avatar}`
       default:
         return null
     }

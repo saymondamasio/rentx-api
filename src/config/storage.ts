@@ -14,9 +14,12 @@ interface IStorageConfig {
 
   upload: { multer: { storage: StorageEngine } }
   config: {
-    disk: unknown
+    disk: {
+      url: string
+    }
     aws: {
       bucket: string
+      url: string
     }
   }
 }
@@ -41,9 +44,12 @@ export const storageConfig = {
     },
   },
   config: {
-    disk: {},
+    disk: {
+      url: process.env.APP_API_URL,
+    },
     aws: {
       bucket: process.env.AWS_BUCKET,
+      url: `http://${process.env.AWS_BUCKET}.s3.amazonaws.com`,
     },
   },
 } as IStorageConfig

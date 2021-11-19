@@ -27,9 +27,9 @@ export class CarImage implements ICarImage {
 
     switch (storageConfig.driver) {
       case 'disk':
-        return `${process.env.APP_API_URL}/cars/${this.image_name}`
+        return `${storageConfig.config.disk.url}/cars/${this.image_name}`
       case 's3':
-        return `http://${storageConfig.config.aws.bucket}.s3.amazonaws.com/cars/${this.image_name}`
+        return `${storageConfig.config.aws.url}/cars/${this.image_name}`
       default:
         return null
     }
