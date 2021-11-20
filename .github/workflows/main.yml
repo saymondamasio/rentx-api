@@ -44,4 +44,4 @@ jobs:
             cd ~/app/rentx-backend
             yarn
             yarn typeorm migration:run
-            yarn start
+            yarn prod
