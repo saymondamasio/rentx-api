@@ -20,6 +20,7 @@ export class UsersRepositoryFake implements IUsersRepository {
       email,
       password,
       driver_license,
+      getAvatarUrl: undefined,
       created_at: new Date(),
       updated_at: new Date(),
     }

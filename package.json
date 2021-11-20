@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build":"tsc",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
@@ -37,6 +37,13 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-decorators": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
     "@types/bcryptjs": "^2.4.2",
@@ -53,6 +60,8 @@
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.2.0",
