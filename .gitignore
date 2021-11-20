@@ -126,3 +126,5 @@ uploads/avatar/*
 uploads/cars/*
 !uploads/cars/.gitkeep
 
+# Typeorm
+ormconfig.json
