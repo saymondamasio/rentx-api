@@ -19,7 +19,7 @@ export class AuthenticateUserController {
       })
 
     response.cookie('refresh_token', refresh_token, {
-      secure: false,
+      secure: authConfig.httpSecure,
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60 * 1000,
       path: authConfig.path_refresh_token,
