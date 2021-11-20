@@ -25,7 +25,7 @@ export class CarImage implements ICarImage {
   getAvatarUrl(): string | null {
     if (!this.image_name) return null
 
-    switch (storageConfig.driver) {
+    switch (storageConfig.provider) {
       case 'disk':
         return `${storageConfig.config.disk.url}/cars/${this.image_name}`
       case 's3':

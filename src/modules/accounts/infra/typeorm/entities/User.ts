@@ -31,7 +31,7 @@ export class User implements IUser {
   getAvatarUrl(): string | null {
     if (!this.avatar) return null
 
-    switch (storageConfig.driver) {
+    switch (storageConfig.provider) {
       case 'disk':
         return `${storageConfig.config.disk.url}/avatar/${this.avatar}`
       case 's3':

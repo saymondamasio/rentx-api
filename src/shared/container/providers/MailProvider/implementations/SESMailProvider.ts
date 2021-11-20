@@ -1,3 +1,4 @@
+import { SES } from 'aws-sdk'
 import nodemailer, { Transporter } from 'nodemailer'
 import { injectable, inject } from 'tsyringe'
 
@@ -6,7 +7,7 @@ import { ISendMailDTO } from '../dtos/ISendMailDTO'
 import { IMailProvider } from '../IMailProvider'
 
 @injectable()
-export class EtherealMailProvider implements IMailProvider {
+export class SESMailProvider implements IMailProvider {
   private client: Transporter
 
   constructor(
@@ -14,12 +15,7 @@ export class EtherealMailProvider implements IMailProvider {
     private mailTemplateProvider: IMailTemplateProvider
   ) {
     const transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      auth: {
-        user: 'norene.wisozk16@ethereal.email',
-        pass: 'GPU7ZuYsqtF9D48GkM',
-      },
+      SES: new SES(),
     })
 
     this.client = transporter
@@ -31,7 +27,7 @@ export class EtherealMailProvider implements IMailProvider {
     to,
     from,
   }: ISendMailDTO): Promise<void> {
-    const message = await this.client.sendMail({
+    await this.client.sendMail({
       from: {
         name: from?.name || 'Rentx',
         address: from?.email || 'noreplay@rentx.com.br',
@@ -43,8 +39,5 @@ export class EtherealMailProvider implements IMailProvider {
       subject,
       html: await this.mailTemplateProvider.parse(templateData),
     })
-
-    console.log('Message %s', message.messageId)
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message))
   }
 }

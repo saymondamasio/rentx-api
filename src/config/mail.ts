@@ -1,5 +1,5 @@
 interface IMailConfig {
-  driver: 'ethereal'
+  provider: 'ethereal' | 'ses'
 
   defaults: {
     from: {
@@ -10,7 +10,7 @@ interface IMailConfig {
 }
 
 export const mailConfig = {
-  driver: process.env.MAIL_DRIVER || 'ethereal',
+  provider: process.env.MAIL_PROVIDER || 'ethereal',
   defaults: {
     from: {
       email: 'saymon.damasio95@gmail.com',

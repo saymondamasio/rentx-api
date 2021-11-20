@@ -7,7 +7,7 @@ const tmpFolder = resolve(__dirname, rootFolder, 'tmp')
 const uploadFolder = resolve(__dirname, rootFolder, 'uploads')
 
 interface IStorageConfig {
-  driver: 'disk' | 's3'
+  provider: 'disk' | 's3'
 
   tmpFolder: string
   uploadFolder: string
@@ -25,7 +25,7 @@ interface IStorageConfig {
 }
 
 export const storageConfig = {
-  driver: process.env.STORAGE_DRIVER || 'disk',
+  provider: process.env.STORAGE_PROVIDER || 'disk',
 
   tmpFolder,
   uploadFolder,
