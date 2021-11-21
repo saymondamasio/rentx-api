@@ -1,16 +1,15 @@
 import { hash } from 'bcryptjs'
 import request from 'supertest'
-import { Connection } from 'typeorm'
+import { Connection, createConnection } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
 import { app } from '@shared/infra/http/app'
-import { createConnectionApplication } from '@shared/infra/typeorm'
 
 let connection: Connection
 
 describe('Create Category Controller', () => {
   beforeAll(async () => {
-    connection = await createConnectionApplication('localhost')
+    connection = await createConnection()
 
     await connection.runMigrations()
 

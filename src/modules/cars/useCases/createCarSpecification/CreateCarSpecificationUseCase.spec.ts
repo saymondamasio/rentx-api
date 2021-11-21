@@ -1,4 +1,3 @@
-import { SpecificationsRepository } from '@modules/cars/infra/typeorm/repositories/SpecificationsRepository'
 import { CarsRepositoryFake } from '@modules/cars/repositories/fakes/CarsRepositoryFake'
 import { SpecificationsRepositoryFake } from '@modules/cars/repositories/fakes/SpecificationsRepositoryFake'
 import { AppError } from '@shared/errors/AppError'

@@ -1,8 +1,8 @@
 import 'reflect-metadata'
-import 'dotenv/config'
 
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import express, { NextFunction, Request, Response } from 'express'
 import { resolve } from 'path'
 import swaggerUI from 'swagger-ui-express'
@@ -15,11 +15,14 @@ import 'express-async-errors'
 import '@shared/container'
 
 import swaggerConfig from '../../../../swagger.json'
-import { createConnectionsApplication } from '../typeorm'
+import '../typeorm'
 import { routes } from './routes'
 
-createConnectionsApplication()
 const app = express()
+
+dotenv.config({
+  path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
+})
 
 app.use(
   cors({

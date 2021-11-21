@@ -70,8 +70,8 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+!.env
+!.env.test
 .env.production
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -127,4 +127,4 @@ uploads/cars/*
 !uploads/cars/.gitkeep
 
 # Typeorm
-ormconfig.json
+ormconfig.ts

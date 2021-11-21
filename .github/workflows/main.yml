@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
   workflow_dispatch:
 
@@ -12,27 +12,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Setup Nodejs
         uses: actions/setup-node@v2.4.1
         with:
           node-version: 16.x
-    
+
       - name: Install Dependencies
         run: yarn
-      
+
       - name: Build
         run: yarn build
-      
+
       - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "., !node_modules"
-          target: "~/app/rentx-backend"
-          
+          source: '., !node_modules'
+          target: '~/app/rentx-backend'
+
       - name: Update API
         uses: appleboy/ssh-action@master
         with:
@@ -44,4 +44,4 @@ jobs:
             cd ~/app/rentx-backend
             yarn
             yarn typeorm migration:run
-            yarn prod
+            NODE_ENV=production yarn prod
