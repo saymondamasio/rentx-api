@@ -44,4 +44,4 @@ jobs:
             cd ~/app/rentx-backend
             yarn
             yarn typeorm migration:run
-            NODE_ENV=production yarn prod
+            pm2 restart rentx_app
