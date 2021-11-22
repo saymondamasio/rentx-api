@@ -1,0 +1,29 @@
+[
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "docker",
+    "password": "docker",
+    "database": "rentx",
+    "uuidExtension": "pgcrypto",
+    "cache": true,
+
+    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+    "entities": ["./src/modules/**/entities/*.ts"],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations",
+      "entitiesDir": "./src/modules/**/entities"
+    }
+  },
+  {
+    "name": "mongo",
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "database": "rentx",
+    "useUnifiedTopology": true,
+    "entities": ["./src/modules/**/infra/typeorm/schemas/*.ts"]
+  }
+]
