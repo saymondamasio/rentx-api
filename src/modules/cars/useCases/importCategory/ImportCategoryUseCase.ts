@@ -16,33 +16,24 @@ export class ImportCategoryUseCase {
     private categoriesRepository: ICategoriesRepository
   ) {}
 
-  loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
-    return new Promise((resolve, reject) => {
-      const categories: IImportCategory[] = []
+  async loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
+    const categories: IImportCategory[] = []
 
-      const stream = fs.createReadStream(file.path)
+    const stream = fs.createReadStream(file.path)
 
-      const parseFile = parse()
+    const parsedFile = parse()
 
-      stream.pipe(parseFile)
+    stream.pipe(parsedFile)
 
-      parseFile
-        .on('data', async line => {
-          const [name, description] = line
+    for await (const chunk of parsedFile) {
+      const [name, description] = chunk
 
-          categories.push({
-            name,
-            description,
-          })
-        })
-        .on('end', () => {
-          fs.promises.unlink(file.path)
-          resolve(categories)
-        })
-        .on('error', (err: Error) => {
-          reject(err)
-        })
-    })
+      categories.push({ name, description })
+    }
+
+    await fs.promises.unlink(file.path)
+
+    return categories
   }
 
   async execute(file: Express.Multer.File): Promise<void> {
