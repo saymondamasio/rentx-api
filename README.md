@@ -1,108 +1,150 @@
-## **Cadastro de carro**
+<h1 align="center">
+	<img alt="Logo" src=".github/logo.svg" width="200px" />
+</h1>
 
-### Requisitos funcionais
+<h3 align="center">
+  RentX
+</h3>
 
-Deve ser possivel cadastrar um novo carro
+<p align="center">Make your rentals with comfort</p>
 
-### Requisitos não funcionais
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/saymondamasio/rentx-api">
 
-### Regras de negocio
+  <a href="https://www.linkedin.com/in/saymondamasio/">
+    <img alt="Made by" src="https://img.shields.io/badge/made%20by-Saymon%20Damásio-gree">
+  </a>
+  
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/saymondamasio/rentx-api">
+  
+  <a href="https://github.com/saymondamasio/rentx-api/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/saymondamasio/rentx-api">
+  </a>
+  
+  <a href="https://github.com/saymondamasio/rentx-api/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/saymondamasio/rentx-api">
+  </a>
+  
+  <img alt="GitHub" src="https://img.shields.io/github/license/saymondamasio/rentx-api">
+</p>
 
-Quem cadastrar o carro deve ser um usuario administrador.
-Não deve ser possivel cadastrar um carro com uma placa já existente
-O carro deve estar disponivel ao cadastrar.
+<p align="center">
+  <a href="#-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-license">License</a>
+</p>
 
-## **Listagem de carros**
+<p id="insomniaButton" align="center">
+  <a href="" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+</p>
 
-### Requisitos funcionais
+## 👨🏻‍💻 About the project
 
-Deve ser possivel listar todos os carros disponiveis.
-Deve ser possivel listar todos os carros disponiveis pelo nome da categoria.
-Deve ser possivel listar todos os carros disponiveis pelo nome da marca.
-Deve ser possivel listar todos os carros disponiveis pelo nome do carro.
+- <p style="color: red;">An API that manages car rentals</p>
 
-### Requisitos não funcionais
+<!-- To see the **web client**, click here: [PROJECT_NAME Web](https://github/saymondamasio/rentx-web)</br>
+To see the **mobile client**, click here: [PROJECT_NAME Mobile](https://github/saymondamasio/rentx-mobile) -->
 
-### Regras de negocio
+## 🚀 Technologies
 
-O usuario não precisa estar logado para listar os carros disponiveis.
+Technologies that I used to develop this api
 
-## **Cadastro de especificação do carro**
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/pt-br/)
+- [Multer](https://github.com/expressjs/multer)
+- [TypeORM](https://typeorm.io/#/)
+- [JWT-token](https://jwt.io/)
+- [uuid v4](https://github.com/thenativeweb/uuidv4/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Date-fns](https://date-fns.org/)
+- [Jest](https://jestjs.io/)
+- [SuperTest](https://github.com/visionmedia/supertest)
+- [Husky](https://github.com/typicode/husky)
+- [Commitlint](https://github.com/conventional-changelog/commitlint)
+- [Commitizen](https://github.com/commitizen/cz-cli)
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [EditorConfig](https://editorconfig.org/)
+- [GithubActions](https://github.com/features/actions/)
 
-### Requisitos funcionais
+## 💻 Getting started
 
-Deve ser possivel cadastrar uma especificação para um carro.
+Import the `Insomnia.json` on Insomnia App or click on [Run in Insomnia](#insomniaButton) button
 
-### Regras de negocio
+### Requirements
 
-Quem cadastrar o carro deve ser um usuario administrador.
-Não deve ser possivel cadastrar uma especificação para um carro não cadastrado.
-Não deve ser possivel cadastrar uma especificação para o mesmo carro.
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
+- [Docker](https://www.docker.com//)
 
-## **Cadastro de imagens do carro**
+> Obs.: Docker is required to run the project on a local machine.
 
-### Requisitos funcionais
+**Clone the project and access the folder**
 
-Deve ser possivel cadastrar a imagem do carro.
+```bash
+$ git clone https://github.com/saymondamasio/rentx-api.git && cd rentx-api
+```
 
-### Requisitos não funcionais
+**Follow the steps below**
 
-Utilizar o multer para upload das imagens.
+```bash
+# Install the dependencies
+$ yarn
 
-### Regras de negocio
+# Create the instance of postgreSQL using docker
+$ docker compose -d up
 
-Quem cadastrar o carro deve ser um usuario administrador.
-O usuario deve poder cadastrar mais de uma imagem para o mesmo carro.
+# Rename the ormconfig.example.json file to ormconfig.json
 
-## **Aluguel de carro**
+mv ormconfig.example.json ormconfig.json
 
-### Requisitos funcionais
+# Once the services are running, run the migrations
+$ yarn typeorm migration:run
 
-Deve ser possivel cadastrar uma aluguel
+# To finish, run the api service
+$ yarn dev
 
-### Regras de negocio
+# Well done, project is started!
+```
 
-O aluguel deve ter uma duração minima de 24 horas.
-Ao realizar o aluguel, os status do carro deverá ser alterado para indisponivel.
-Não deve ser possivel cadastrar um novo aluguel caso já exista um aberto para o mesmo usuario.
-Não deve ser possivel cadastrar um novo aluguel caso já exista um aberto para o mesmo carro.
-O usuario deve estar logado na aplicação.
+## 🤔 How to contribute
 
-## **Devolução do carro**
+**Make a fork of this repository**
 
-### Requisitos Funcionais
+```bash
+# Fork using GitHub official command line
+# If you don't have the GitHub CLI, use the web site to do that.
 
-Deve ser possivel realizar a devolução de um carro
+$ gh repo fork saymondamasio/rentx-api
+```
 
-### Regras de Negocio
+**Follow the steps below**
 
-Se o carro for devolvido com menos de 24 horas, deverá ser cobrado diária completa.
-Ao realizar a devolução, o carro deverá ser liberado para outro aluguel.
-Ao realizar a devolução, o usuário deverá ser liberado para outro aluguel.
-Ao realizar a devolução, deverá ser calculado o total do aluguel.
-Caso o horário de devolução seja superior ao horário previsto no de entrega, deverá ser cobrado multa proporcional aos dias de atraso.
-Caso haja multa, deverá ser somado ao total do aluguel.
-O usuario deve estar logado na aplicação.
+```bash
+# Clone your fork
+$ git clone your-fork-url && cd NOME_DO_REPO
 
-## **Listagem de alugueis para usuario**
+# Create a branch with your feature
+$ git checkout -b my-feature
 
-### Requisitos Funcionais
+# Make the commit with your changes
+$ git commit -m 'feat: My new feature'
+## or use cli commitlint
+$ yarn commit
 
-Deve ser possivel realizar a busca de todos os aluguéis de um usuario.
+# Send the code to your remote branch
+$ git push origin my-feature
+```
 
-### Regras de Negocio
+After your pull request is merged, you can delete your branch
 
-O usuario deve estar logado na aplicação.
+## 📝 License
 
-## **Recuperar senha**
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Requisitos Funcionais
+---
 
-Deve ser possivel recuperar a senha de um usuario informando o e-mail cadastrado.
-O usuario deve receber um e-mail com o passo a passo para recuperar a senha.
-O usuario deve conseguir inserir a nova senha.
-
-### Regras de Negocio
-
-O usuario precisa informar um nova senha.
-O link enviado para a recuperação deve expirar após 3 horas.
+Made with 💜 &nbsp;by Saymon Damásio 👋 &nbsp;[See my linkedin](https://www.linkedin.com/in/saymondamasio/)
