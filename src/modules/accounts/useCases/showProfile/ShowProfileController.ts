@@ -1,4 +1,4 @@
-import { classToClass } from 'class-transformer'
+import { instanceToInstance } from 'class-transformer'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
@@ -12,6 +12,6 @@ export class ShowProfileController {
 
     const user = await showProfileUseCase.execute(user_id)
 
-    return response.json(classToClass(user))
+    return response.json(instanceToInstance(user))
   }
 }
