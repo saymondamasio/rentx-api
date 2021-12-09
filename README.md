@@ -57,9 +57,13 @@ Technologies that I used to develop this api
 - [Multer](https://github.com/expressjs/multer)
 - [TypeORM](https://typeorm.io/#/)
 - [JWT-token](https://jwt.io/)
+- [Handlebars](https://handlebarsjs.com/)
 - [uuid v4](https://github.com/thenativeweb/uuidv4/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [Date-fns](https://date-fns.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Redis](https://redis.io/)
+- [Tsyringe](https://github.com/microsoft/tsyringe/)
+- [Date.js](https://day.js.org/)
 - [Jest](https://jestjs.io/)
 - [SuperTest](https://github.com/visionmedia/supertest)
 - [Husky](https://github.com/typicode/husky)
@@ -94,7 +98,7 @@ $ git clone https://github.com/saymondamasio/rentx-api.git && cd rentx-api
 # Install the dependencies
 $ yarn
 
-# Create the instance of postgreSQL using docker
+# Create the instances databases using docker
 $ docker compose -d up
 
 # Rename the ormconfig.example.json file to ormconfig.json
