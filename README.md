@@ -64,6 +64,8 @@ Technologies that I used to develop this api
 - [Redis](https://redis.io/)
 - [Tsyringe](https://github.com/microsoft/tsyringe/)
 - [Date.js](https://day.js.org/)
+- [Sentry](https://sentry.io/)
+- [Swagger](https://swagger.io/)
 - [Jest](https://jestjs.io/)
 - [SuperTest](https://github.com/visionmedia/supertest)
 - [Husky](https://github.com/typicode/husky)
