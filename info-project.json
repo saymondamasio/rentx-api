@@ -1,5 +1,5 @@
 {
   "name": "RentX",
-  "short_description": "Uma api feita para alugueis de carros",
-  "long_description": "Essa API tem como objetivo administrar um sistema de alugueis de carros, tem como funcionalidads a criação e autenticação de um novo usuario, o cadastro de um novo carro, suas especificações e imagens, a criação de um aluguel para um carro disponivel, criar a baixa da devolução do carro e a listagem de todos os alugueis de um usuário ",
+  "description": "Essa API tem como objetivo administrar um sistema de alugueis de carros, tem como funcionalidads a criação e autenticação de um novo usuario, o cadastro de um novo carro, suas especificações e imagens, a criação de um aluguel para um carro disponivel, criar a baixa da devolução do carro e a listagem de todos os alugueis de um usuário",
+  "short_description": "Uma api feita para alugueis de carros"
 }
