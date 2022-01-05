@@ -6,7 +6,7 @@
   RentX
 </h3>
 
-<p align="center">Make your rentals with comfort</p>
+<p align="center">Uma api feita para alugueis de carros</p>
 
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/saymondamasio/rentx-api">
@@ -42,7 +42,7 @@
 
 ## 👨🏻‍💻 About the project
 
-- <p style="color: red;">An API that manages car rentals</p>
+<p>Essa API tem como objetivo administrar um sistema de alugueis de carros, tem como funcionalidade a criação e autenticação de um novo usuário, o cadastro de um novo carro, suas especificações e imagens, a criação de um aluguel para um carro disponível, criar a baixa da devolução do carro e a listagem de todos os alugueis de um usuário</p>
 
 <!-- To see the **web client**, click here: [PROJECT_NAME Web](https://github/saymondamasio/rentx-web)</br>
 To see the **mobile client**, click here: [PROJECT_NAME Mobile](https://github/saymondamasio/rentx-mobile) -->
