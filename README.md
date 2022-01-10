@@ -37,7 +37,7 @@
 </p>
 
 <p id="insomniaButton" align="center">
-  <a href="" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://insomnia.rest/run/?label=RentX%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fsaymondamasio%2Frentx-api%2Fmain%2Finsomnia.json" target="_blank"><img      src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 ## 👨🏻‍💻 About the project
