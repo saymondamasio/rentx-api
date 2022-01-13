@@ -103,6 +103,14 @@ $ yarn
 # Create the instances databases using docker
 $ docker compose -d up
 
+# Or create manually the instances databases
+docker run --name postgres-db -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
+# Don't forget to create the rentx database in postgres before running the project
+
+docker run --name mongo-db -p 27017:27017 -d mongo
+
+docker run --name redis-db -p 6379:6379 -d redis
+
 # Rename the ormconfig.example.json file to ormconfig.json
 
 mv ormconfig.example.json ormconfig.json
