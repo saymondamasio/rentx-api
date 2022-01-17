@@ -22,7 +22,9 @@ export const rateLimiter = rateLimit({
 
   // Redis store configuration
   store: new RedisStore({
-    sendCommand: async (...args: string[]) => client.sendCommand(args),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    sendCommand: (...args: string[]) => client.sendCommand(args),
   }),
   handler: function (req, res /* next */) {
     return res.status(429).json({

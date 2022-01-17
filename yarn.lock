@@ -1601,6 +1601,13 @@
   dependencies:
     dotenv "*"
 
+"@types/express-rate-limit@3":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@types/express-rate-limit/-/express-rate-limit-3.3.5.tgz#947db7b9aed962c2f5eaca3c68fd0a739706e190"
+  integrity sha512-v6M28DcbdATYvzTN5lFJhN2EP6BgY8MbTskcKJ/m5bmGuzFKHfbEVXF3po8U8ivOyyeT5o6HV0janPlFBBN5yg==
+  dependencies:
+    "@types/express" "*"
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.25"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.25.tgz#e42f7046adc65ece2eb6059b77aecfbe9e9f82e0"
@@ -1624,6 +1631,13 @@
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.5.tgz#21ffba0d98da4350db64891f92a9e5db3cdb4e15"
   integrity sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==
+  dependencies:
+    "@types/node" "*"
+
+"@types/ioredis@*":
+  version "4.28.7"
+  resolved "https://registry.yarnpkg.com/@types/ioredis/-/ioredis-4.28.7.tgz#ee79987ef80597ba8c17cfbf9345859ff9233c2d"
+  integrity sha512-jnSGCD2/TPk02j6v6CGqaCEl0LbmLgK6jUuk/AFaSNUBV+SCHiG7E7fnwJreN6hw9GqtLAFkJs4zFbkJrz11mQ==
   dependencies:
     "@types/node" "*"
 
@@ -1737,7 +1751,16 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/redis@^2.8.32":
+"@types/rate-limit-redis@^1.7.4":
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@types/rate-limit-redis/-/rate-limit-redis-1.7.4.tgz#6f6451481e067359522ff1e1fcf4009daf7418d0"
+  integrity sha512-TDsh9CJHHhx+sGHlqF6MI+PgEv91o/wQ67e2IR02ebYPzWQ8Rk0pcVY+WBy2pjxa+cAkPwjcOFDd21VToKaOzQ==
+  dependencies:
+    "@types/express-rate-limit" "3"
+    "@types/ioredis" "*"
+    "@types/redis" "^2.8.0"
+
+"@types/redis@^2.8.0", "@types/redis@^2.8.32":
   version "2.8.32"
   resolved "https://registry.yarnpkg.com/@types/redis/-/redis-2.8.32.tgz#1d3430219afbee10f8cfa389dad2571a05ecfb11"
   integrity sha512-7jkMKxcGq9p242exlbsVzuJb57KqHRhNl4dHoQu2Y5v9bCAbtIXXH0R3HleSQW4CTOqpHIYUW3t6tpUj4BVQ+w==
