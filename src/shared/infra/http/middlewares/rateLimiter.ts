@@ -6,11 +6,8 @@ import { cacheConfig } from '@config/cache'
 
 const client = createClient({
   legacyMode: true,
-  url: `redis://${cacheConfig.config.redis.host}:${cacheConfig.config.redis.port}`,
-  password: cacheConfig.config.redis.password,
+  url: cacheConfig.config.redis.url,
   socket: {
-    host: cacheConfig.config.redis.host,
-    port: cacheConfig.config.redis.port,
     tls: true,
     rejectUnauthorized: false,
   },

@@ -3,9 +3,7 @@ interface ICacheConfig {
 
   config: {
     redis: {
-      host: string
-      port: number
-      password: string
+      url: string
     }
   }
 }
@@ -14,9 +12,7 @@ export const cacheConfig = {
   driver: 'redis',
   config: {
     redis: {
-      host: process.env.REDIS_HOST || 'localhost',
-      port: Number(process.env.REDIS_PORT) || 6379,
-      password: process.env.REDIS_PASS || undefined,
+      url: process.env.REDIS_URL,
     },
   },
 } as ICacheConfig
