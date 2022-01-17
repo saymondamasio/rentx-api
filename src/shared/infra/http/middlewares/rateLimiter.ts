@@ -10,10 +10,9 @@ export async function rateLimiter(
   res: Response,
   next: NextFunction
 ): Promise<void> {
-  try {
-    const redisClient = createClient({
-      legacyMode: true,
-      url: `redis://${cacheConfig.config.redis.host}:${cacheConfig.config.redis.port}`,
+  const redisClient = createClient({
+    legacyMode: true,
+    url: `redis://${cacheConfig.config.redis.host}:${cacheConfig.config.redis.port}`,
       password: cacheConfig.config.redis.password,
       socket: {
         host: cacheConfig.config.redis.host,
@@ -21,19 +20,20 @@ export async function rateLimiter(
         tls: true,
         rejectUnauthorized: false,
       },
-    })
-
-    await redisClient.connect()
-
-    redisClient.on('error', err => console.log(`${err.name}: ${err.message}`))
-
-    const limiter = new RateLimiterRedis({
+  })
+    
+  await redisClient.connect()
+    
+  redisClient.on('error', err => console.log(`${err.name}: ${err.message}`))
+    
+  const limiter = new RateLimiterRedis({
       storeClient: redisClient,
       keyPrefix: 'rate-limit',
       points: 20,
       duration: 5,
       blockDuration: 10,
-    })
+  })
+  try {
     await limiter.consume(req.ip)
 
     return next()
