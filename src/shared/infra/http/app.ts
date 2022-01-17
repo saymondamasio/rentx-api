@@ -1,7 +1,6 @@
 import '@shared/container'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import express, { NextFunction, Request, Response } from 'express'
 import 'express-async-errors'
 import { resolve } from 'path'
@@ -31,10 +30,6 @@ Sentry.init({
 })
 app.use(Sentry.Handlers.requestHandler())
 app.use(Sentry.Handlers.tracingHandler())
-
-dotenv.config({
-  path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
-})
 
 app.use(
   cors({
