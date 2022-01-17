@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+   "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "prod": "node dist/shared/infra/http/server.js",
