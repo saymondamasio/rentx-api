@@ -9,6 +9,7 @@ export default [
     database: process.env.DB_NAME,
     uuidExtension: 'pgcrypto',
     cache: true,
+    ssl: true,
 
     migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
     entities: ['./src/modules/**/entities/*.ts'],
