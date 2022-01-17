@@ -1,51 +1,35 @@
-import { NextFunction, Request, Response } from 'express'
-import { RateLimiterRedis } from 'rate-limiter-flexible'
+import rateLimit from 'express-rate-limit'
+import RedisStore from 'rate-limit-redis'
 import { createClient } from 'redis'
 
 import { cacheConfig } from '@config/cache'
-import { AppError } from '@shared/errors/AppError'
 
-export async function rateLimiter(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
-  const redisClient = createClient({
-    legacyMode: true,
-    url: `redis://${cacheConfig.config.redis.host}:${cacheConfig.config.redis.port}`,
-      password: cacheConfig.config.redis.password,
-      socket: {
-        host: cacheConfig.config.redis.host,
-        port: cacheConfig.config.redis.port,
-        tls: true,
-        rejectUnauthorized: false,
-      },
-  })
-    
-  await redisClient.connect()
-    
-  redisClient.on('error', err => console.log(`${err.name}: ${err.message}`))
-    
-  const limiter = new RateLimiterRedis({
-      storeClient: redisClient,
-      keyPrefix: 'rate-limit',
-      points: 20,
-      duration: 5,
-      blockDuration: 10,
-  })
-  try {
-    await limiter.consume(req.ip)
+const client = createClient({
+  legacyMode: true,
+  url: `redis://${cacheConfig.config.redis.host}:${cacheConfig.config.redis.port}`,
+  password: cacheConfig.config.redis.password,
+  socket: {
+    host: cacheConfig.config.redis.host,
+    port: cacheConfig.config.redis.port,
+    tls: true,
+    rejectUnauthorized: false,
+  },
+})
 
-    return next()
-  } catch (rateLimiterRes) {
-    req.headers['Retry-After'] = String(rateLimiterRes.msBeforeNext / 1000)
-    req.headers['X-RateLimit-Limit'] = String(20)
-    req.headers['X-RateLimit-Remaining'] = String(
-      rateLimiterRes.remainingPoints
-    )
-    req.headers['X-RateLimit-Reset'] = new Date(
-      Date.now() + rateLimiterRes.msBeforeNext
-    ).toString()
-    throw new AppError('Too many requests', 429)
-  }
-}
+export const rateLimiter = rateLimit({
+  // Rate limiter configuration
+  windowMs: 1 * 60 * 1000, // 1 minutes
+  max: 50, // Limit each IP to 100 requests per `window` (here, per 1 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+
+  // Redis store configuration
+  store: new RedisStore({
+    sendCommand: async (...args: string[]) => client.sendCommand(args),
+  }),
+  handler: function (req, res /* next */) {
+    return res.status(429).json({
+      error: 'You sent too many requests. Please wait a while then try again',
+    })
+  },
+})
