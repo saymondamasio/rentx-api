@@ -1,9 +1,9 @@
-import 'reflect-metadata'
-
+import '@shared/container'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import express, { NextFunction, Request, Response } from 'express'
+import 'express-async-errors'
 import { resolve } from 'path'
 import swaggerUI from 'swagger-ui-express'
 
@@ -11,10 +11,6 @@ import { storageConfig } from '@config/storage'
 import * as Sentry from '@sentry/node'
 import * as Tracing from '@sentry/tracing'
 import { AppError } from '@shared/errors/AppError'
-
-import 'express-async-errors'
-
-import '@shared/container'
 
 import swaggerConfig from '../../../../swagger.json'
 import '../typeorm'
