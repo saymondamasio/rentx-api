@@ -1,1 +1,1 @@
-web: yarn build && yarn prod
+web: npm install && npm run build && npm run typeorm migrations:run && npm run prod

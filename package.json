@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "prod": "pm2 start dist/shared/infra/http/server.js --name rentx_app",
+    "prod": "node dist/shared/infra/http/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
