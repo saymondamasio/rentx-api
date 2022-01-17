@@ -13,6 +13,8 @@ const client = createClient({
   },
 })
 
+client.connect()
+
 export const rateLimiter = rateLimit({
   // Rate limiter configuration
   windowMs: 1 * 60 * 1000, // 1 minutes
@@ -24,7 +26,7 @@ export const rateLimiter = rateLimit({
   store: new RedisStore({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    sendCommand: (...args: string[]) => client.sendCommand(args),
+    client,
   }),
   handler: function (req, res /* next */) {
     return res.status(429).json({
