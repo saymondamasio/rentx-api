@@ -28,13 +28,9 @@ const devConfig = [
   {
     name: 'mongo',
     type: 'mongodb',
-    host: process.env.MONGO_HOST,
-    port: process.env.MONGO_PORT,
-    database: process.env.MONGO_NAME,
-    username: process.env.MONGO_USER,
-    password: process.env.MONGO_PASS,
+    url: process.env.MONGO_URL,
     useUnifiedTopology: true,
-    entities: ['./src/modules/**/infra/typeorm/schemas/*.ts'],
+    entities: ['./src/modules/**/infra/schemas/*.ts'],
   },
 ]
 
@@ -65,13 +61,9 @@ const prodConfig = [
   {
     name: 'mongo',
     type: 'mongodb',
-    host: process.env.MONGO_HOST,
-    port: process.env.MONGO_PORT,
-    database: process.env.MONGO_NAME,
-    username: process.env.MONGO_USER,
-    password: process.env.MONGO_PASS,
+    url: process.env.MONGO_URL,
     useUnifiedTopology: true,
-    entities: ['./dist/modules/**/infra/typeorm/schemas/*.js'],
+    entities: ['./dist/modules/**/infra/schemas/*.js'],
   },
 ]
 
