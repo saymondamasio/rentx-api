@@ -1,1 +1,0 @@
-web: npm install && npm run build && npm run typeorm migrations:run && npm run prod
