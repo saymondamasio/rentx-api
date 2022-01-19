@@ -10,6 +10,7 @@ const client = createClient({
   socket: {
     tls: true,
     rejectUnauthorized: false,
+    connectTimeout: 5000,
   },
 })
 
@@ -28,6 +29,7 @@ export const rateLimiter = rateLimit({
     // @ts-ignore
     client,
   }),
+  skipFailedRequests: true,
   handler: function (req, res /* next */) {
     return res.status(429).json({
       error: 'You sent too many requests. Please wait a while then try again',
