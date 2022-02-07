@@ -13,6 +13,10 @@ export async function rateLimiter(
   const redisClient = createClient({
     legacyMode: true,
     url: cacheConfig.config.redis.url,
+    socket: {
+      tls: true,
+      rejectUnauthorized: false,
+    },
   })
 
   const limiter = new RateLimiterRedis({
