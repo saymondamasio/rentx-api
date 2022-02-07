@@ -43,11 +43,11 @@ export async function rateLimiter(
   response: Response,
   next: NextFunction
 ): Promise<void> {
-  try {
-    if (!isConnected) {
-      await redisClient.connect()
-    }
+  if (!isConnected) {
+    await redisClient.connect()
+  }
 
+  try {
     await limiter.consume(request.ip)
 
     next()
