@@ -16,7 +16,13 @@ import { cacheConfig } from '@config/cache'
 
 // client.connect()
 
-const client = new Redis(cacheConfig.config.redis.url)
+const client = new Redis(cacheConfig.config.redis.url, {
+  tls: {
+    rejectUnauthorized: false,
+  },
+})
+
+console.log(cacheConfig.config.redis.url)
 
 export const rateLimiter = rateLimit({
   // Rate limiter configuration
