@@ -5,6 +5,8 @@ import { createClient } from 'redis'
 import { cacheConfig } from '@config/cache'
 import { AppError } from '@shared/errors/AppError'
 
+let isConnected = false
+
 const redisClient = createClient({
   legacyMode: true,
   url: cacheConfig.config.redis.url,
@@ -21,13 +23,30 @@ const limiter = new RateLimiterRedis({
   duration: 1, // por 1 second, by IP
 })
 
+redisClient.on('connect', () => {
+  console.log('connected redis')
+  isConnected = true
+})
+redisClient.on('end', () => {
+  console.log('disconnected redis')
+  isConnected = false
+})
+redisClient.on('reconnecting', () => {
+  console.log('reconnecting redis')
+})
+redisClient.on('error', err => {
+  console.log('error redis', { err })
+})
+
 export async function rateLimiter(
   request: Request,
   response: Response,
   next: NextFunction
 ): Promise<void> {
   try {
-    await redisClient.connect()
+    if (!isConnected) {
+      await redisClient.connect()
+    }
 
     await limiter.consume(request.ip)
 
