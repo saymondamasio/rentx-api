@@ -1,20 +1,22 @@
 import rateLimit from 'express-rate-limit'
+import Redis from 'ioredis'
 import RedisStore from 'rate-limit-redis'
-import { createClient } from 'redis'
 
 import { cacheConfig } from '@config/cache'
 
-const client = createClient({
-  legacyMode: true,
-  url: cacheConfig.config.redis.url,
-  socket: {
-    tls: true,
-    rejectUnauthorized: false,
-    connectTimeout: 5000,
-  },
-})
+// const client = createClient({
+//   legacyMode: true,
+//   url: cacheConfig.config.redis.url,
+//   socket: {
+//     tls: true,
+//     rejectUnauthorized: false,
+//     connectTimeout: 5000,
+//   },
+// })
 
-client.connect()
+// client.connect()
+
+const client = new Redis(cacheConfig.config.redis.url)
 
 export const rateLimiter = rateLimit({
   // Rate limiter configuration
@@ -27,7 +29,8 @@ export const rateLimiter = rateLimit({
   store: new RedisStore({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    client,
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    sendCommand: (...args: string[]) => client.call(...args),
   }),
   skipFailedRequests: true,
   handler: function (req, res /* next */) {
