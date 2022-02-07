@@ -20,7 +20,7 @@ const limiter = new RateLimiterRedis({
   storeClient: redisClient,
   keyPrefix: 'rateLimiter',
   points: 10, // 10 requests
-  duration: 10, // por 1 second, by IP
+  duration: 1, // por 1 second, by IP
 })
 
 redisClient.on('connect', () => {
