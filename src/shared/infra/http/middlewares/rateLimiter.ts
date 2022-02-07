@@ -1,47 +1,36 @@
-import rateLimit from 'express-rate-limit'
-import Redis from 'ioredis'
-import RedisStore from 'rate-limit-redis'
+import { NextFunction, Request, Response } from 'express'
+import { RateLimiterRedis } from 'rate-limiter-flexible'
+import { createClient } from 'redis'
 
 import { cacheConfig } from '@config/cache'
+import { AppError } from '@shared/errors/AppError'
 
-// const client = createClient({
-//   legacyMode: true,
-//   url: cacheConfig.config.redis.url,
-//   socket: {
-//     tls: true,
-//     rejectUnauthorized: false,
-//     connectTimeout: 5000,
-//   },
-// })
+export async function rateLimiter(
+  request: Request,
+  response: Response,
+  next: NextFunction
+): Promise<void> {
+  const redisClient = createClient({
+    legacyMode: true,
+    url: cacheConfig.config.redis.url,
+  })
 
-// client.connect()
+  const limiter = new RateLimiterRedis({
+    storeClient: redisClient,
+    keyPrefix: 'rateLimiter',
+    points: 10, // 10 requests
+    duration: 1, // por 1 second, by IP
+  })
 
-const client = new Redis(cacheConfig.config.redis.url, {
-  tls: {
-    rejectUnauthorized: false,
-  },
-})
+  try {
+    await redisClient.connect()
 
-console.log(cacheConfig.config.redis.url)
+    await limiter.consume(request.ip)
 
-export const rateLimiter = rateLimit({
-  // Rate limiter configuration
-  windowMs: 1 * 60 * 1000, // 1 minutes
-  max: 50, // Limit each IP to 100 requests per `window` (here, per 1 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    next()
+  } catch (error) {
+    console.log(error)
 
-  // Redis store configuration
-  store: new RedisStore({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    sendCommand: (...args: string[]) => client.call(...args),
-  }),
-  skipFailedRequests: true,
-  handler: function (req, res /* next */) {
-    return res.status(429).json({
-      error: 'You sent too many requests. Please wait a while then try again',
-    })
-  },
-})
+    throw new AppError('Too many requests', 429)
+  }
+}
